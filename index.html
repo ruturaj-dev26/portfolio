@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruturaj Bhambure - Operations Excellence Specialist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --accent-color: #06d6a0;
+            --dark-bg: #0a0e27;
+            --card-bg: #1a1f3a;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --gradient: linear-gradient(135deg, #2563eb, #7c3aed);
+            --gradient-alt: linear-gradient(135deg, #06d6a0, #2563eb);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--dark-bg);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -200px;
+            right: -200px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .bg-animation::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -100px;
+            left: -100px;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-alt);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            animation: fadeInLeft 1s ease;
+        }
+
+        .hero-greeting {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero-name {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-title {
+            font-size: clamp(1.3rem, 3vw, 2rem);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInRight 1s ease;
+        }
+
+        .profile-image-container {
+            position: relative;
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .profile-image-wrapper {
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            background: var(--gradient);
+            padding: 4px;
+        }
+
+        .profile-image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, var(--accent-color), transparent 30%);
+            animation: rotate 4s linear infinite;
+        }
+
+        .profile-image-inner {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 28px;
+            overflow: hidden;
+        }
+
+        .profile-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            position: relative;
+            z-index: 1;
+        }
+
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: var(--card-bg);
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-card-1 {
+            top: 10%;
+            right: -10%;
+            animation-delay: 0s;
+        }
+
+        .floating-card-2 {
+            bottom: 20%;
+            left: -10%;
+            animation-delay: 1s;
+        }
+
+        .floating-card-3 {
+            top: 60%;
+            right: -15%;
+            animation-delay: 2s;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Experience Section */
+        .experience-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gradient);
+            transform: translateX(-50%);
+        }
+
+        .experience-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .experience-item:nth-child(even) .experience-content {
+            order: 2;
+        }
+
+        .experience-item:nth-child(even) .experience-logo {
+            order: 1;
+        }
+
+        .experience-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .experience-content:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .experience-date {
+            color: var(--accent-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-company {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .experience-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .experience-description ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .experience-description li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-description li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .experience-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .company-logo {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            padding: 1rem;
+        }
+
+        .company-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            border: 4px solid var(--dark-bg);
+            z-index: 2;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .skill-category-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-icon {
+            font-size: 1.8rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--accent-color);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid rgba(6, 214, 160, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(6, 214, 160, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Education Section */
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .education-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .education-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .education-degree {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-field {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .education-school {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-year {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(5px);
+            border-color: var(--accent-color);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-details p {
+            color: var(--text-secondary);
+        }
+
+        .contact-details a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-details a:hover {
+            color: var(--primary-color);
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .experience-item {
+                grid-template-columns: 1fr;
+            }
+
+            .experience-item:nth-child(even) .experience-content {
+                order: 1;
+            }
+
+            .experience-item:nth-child(even) .experience-logo {
+                order: 2;
+            }
+
+            .timeline-line {
+                left: 30px;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .section {
+                padding: 60px 1rem;
+            }
+
+            .floating-card {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Ruturaj Bhambure</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-greeting">👋 Hello, I'm</div>
+                <h1 class="hero-name">Ruturaj Bhambure</h1>
+                <h2 class="hero-title">Operations Excellence Specialist</h2>
+                <p class="hero-description">
+                    Driven professional with 5+ years of experience in Insurance and Operations. 
+                    Specialized in data analysis, process optimization, and delivering excellence 
+                    through analytical thinking and advanced Excel expertise.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">4</div>
+                        <div class="stat-label">Companies</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">MBA</div>
+                        <div class="stat-label">IT Degree</div>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="https://www.linkedin.com/in/ruturajbhambure" target="_blank" class="btn btn-secondary">
+                        LinkedIn Profile
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-image-container">
+                    <div class="profile-image-wrapper">
+                        <div class="profile-image-inner">
+                            <img src="https://media.licdn.com/dms/image/v2/D5603AQEYQwBGFHSs5g/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1726471733743?e=1736380800&v=beta&t=9aPyrzUVjFZrGVQmjxCd_CPP8ey-nDyGPiU1SWgYcK0" alt="Ruturaj Bhambure" class="profile-image">
+                        </div>
+                    </div>
+                    <div class="floating-elements">
+                        <div class="floating-card floating-card-1">
+                            <div class="card-icon">📊</div>
+                            <div class="card-text">Data Analytics</div>
+                        </div>
+                        <div class="floating-card floating-card-2">
+                            <div class="card-icon">⚡</div>
+                            <div class="card-text">Process Excellence</div>
+                        </div>
+                        <div class="floating-card floating-card-3">
+                            <div class="card-icon">🎯</div>
+                            <div class="card-text">Results Driven</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section reveal">
+        <div class="section-header">
+            <div class="section-subtitle">Career Journey</div>
+            <h2 class="section-title">Work Experience</h2>
+            <p class="section-description">
+                A proven track record of delivering excellence across operations, analytics, and process improvement
+            </p>
+        </div>
+        <div class="experience-timeline">
+            <div class="timeline-line"></div>
+            
+            <div class="experience-item">
+                <div class="experience-content">
+                    <div class="experience-date">March 2024 - Present</div>
+                    <h3 class="experience-title">Operations Excellence Specialist</h3>
+                    <div class="experience-company">Dassault Systèmes • Pune, MH</div>
+                    <div class="experience-description">
+                        <ul>
+                            <li>Updated KPI dashboards daily using Excel VBA macros</li>
+                            <li>Ensured data accuracy with advanced Excel functions</li>
+                            <li>Created sub-contractor requests and internal work orders</li>
+                            <li>Developed strategies and improvements for daily operations</li>
+                            <li>Prepared analytical data presentations for leadership</li>
+                            <li>Designed SOPs for multiple internal processes</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="experience-logo">
+                    <div class="company-logo">
+                        <img src="https://logo.clearbit.com/3ds.com" alt="Dassault Systèmes">
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-content">
+                    <div class="experience-date">July 2023 - March 2024</div>
+                    <h3 class="experience-title">Process Specialist (Analyst)</h3>
+                    <div class="experience-company">Principal Global Services • Pune, MH</div>
+                    <div class="experience-description">
+                        <ul>
+                            <li>Reviewed, analyzed, and processed transactions as per SOPs</li>
+                            <li>Maintained high service standards and accuracy</li>
+                            <li>Ensured compliance with internal and regulatory policies</li>
+                            <li>Responded promptly to internal and external queries</li>
+                            <li>Built strong partnerships across departments</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="experience-logo">
+                    <div class="company-logo">
+                        <img src="https://logo.clearbit.com/principal.com" alt="Principal Global Services">
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-content">
+                    <div class="experience-date">August 2019 - June 2023</div>
+                    <h3 class="experience-title">Senior Process Executive</h3>
+                    <div class="experience-company">Cognizant Technology Solutions • Pune, MH</div>
+                    <div class="experience-description">
+                        <ul>
+                            <li>Managed claims emails and archived within SLA timelines</li>
+                            <li>Maintained TAT for task execution and reporting</li>
+                            <li>Created monthly Excel reports using VLOOKUP, pivot tables</li>
+                            <li>Delivered process training to new team members</li>
+                            <li>Validated Power BI reports and communicated with clients</li>
+                            <li>Updated SOPs as needed; managed task status reporting</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="experience-logo">
+                    <div class="company-logo">
+                        <img src="https://logo.clearbit.com/cognizant.com" alt="Cognizant">
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-content">
+                    <div class="experience-date">May 2022 - July 2022</div>
+                    <h3 class="experience-title">Data Analyst Intern</h3>
+                    <div class="experience-company">Qollabb Edutech Pvt. Ltd. • Remote</div>
+                    <div class="experience-description">
+                        <ul>
+                            <li>Worked on Python for Data Science project</li>
+                            <li>Applied industry practices and conducted independent research</li>
+                            <li>Created data visualizations using Python libraries</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="experience-logo">
+                    <div class="company-logo">
+                        <div style="font-size: 2rem; color: #2563eb; font-weight: bold;">Q</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section reveal">
+        <div class="section-header">
+            <div class="section-subtitle">Expertise</div>
+            <h2 class="section-title">Skills & Technologies</h2>
+            <p class="section-description">
+                Comprehensive skill set spanning data analysis, business intelligence, and process optimization
+            </p>
+        </div>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3 class="skill-category-title">
+                    <span class="skill-icon">💼</span>
+                    Tools & Applications
+                </h3>
+                <div class="skill-list">
+                    <span class="skill-tag">MS Office Suite</span>
+                    <span class="skill-tag">Power BI</span>
+                    <span class="skill-tag">Tableau</span>
+                    <span class="skill-tag">Salesforce</span>
+                    <span class="skill-tag">PowerPoint</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="skill-category-title">
+                    <span class="skill-icon">📊</span>
+                    Excel Expertise
+                </h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Pivot Tables</span>
+                    <span class="skill-tag">VLOOKUP</span>
+                    <span class="skill-tag">HLOOKUP</span>
+                    <span class="skill-tag">Macros</span>
+                    <span class="skill-tag">VBA</span>
+                    <span class="skill-tag">Conditional Formatting</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="skill-category-title">
+                    <span class="skill-icon">💻</span>
+                    Programming
+                </h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Data Science</span>
+                    <span class="skill-tag">Data Visualization</span>
+                </div>
+            </div>
+
+            <div class="skill-category">
+                <h3 class="skill-category-title">
+                    <span class="skill-icon">🎯</span>
+                    Core Competencies
+                </h3>
+                <div class="skill-list">
+                    <span class="skill-tag">Analytical Thinking</span>
+                    <span class="skill-tag">Process Improvement</span>
+                    <span class="skill-tag">Communication</span>
+                    <span class="skill-tag">Team Leadership</span>
+                    <span class="skill-tag">SOP Design</span>
+                    <span class="skill-tag">Project Management</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section reveal">
+        <div class="section-header">
+            <div class="section-subtitle">Academic Background</div>
+            <h2 class="section-title">Education & Certifications</h2>
+            <p class="section-description">
+                Strong academic foundation combined with industry-recognized certifications
+            </p>
+        </div>
+        <div class="education-grid">
+            <div class="education-card">
+                <div class="education-icon">🎓</div>
+                <h3 class="education-degree">Masters of Business Administration</h3>
+                <div class="education-field">Information Technology</div>
+                <div class="education-school">Dr. D.Y. Patil Vidyapeeth, Pune</div>
+                <div class="education-year">Distance Learning • Graduated 2022</div>
+            </div>
+
+            <div class="education-card">
+                <div class="education-icon">📚</div>
+                <h3 class="education-degree">Bachelor of Business Administration</h3>
+                <div class="education-field">Finance</div>
+                <div class="education-school">Savitribai Phule Pune University</div>
+                <div class="education-year">Graduated 2019</div>
+            </div>
+
+            <div class="education-card">
+                <div class="education-icon">🏆</div>
+                <h3 class="education-degree">Professional Certifications</h3>
+                <div class="education-field">Great Learning</div>
+                <div class="education-school">
+                    • Data Visualization With Power BI<br>
+                    • Data Visualization using Python
+                </div>
+                <div class="education-year">Industry Certified</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section reveal">
+        <div class="section-header">
+            <div class="section-subtitle">Get In Touch</div>
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="section-description">
+                Open to new opportunities and exciting collaborations. Let's discuss how I can add value to your organization.
+            </p>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-details">
+                        <h3>Email</h3>
+                        <p><a href="mailto:bhamburern@gmail.com">bhamburern@gmail.com</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-details">
+                        <h3>Phone</h3>
+                        <p><a href="tel:+919823145426">+91 9823145426</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-details">
+                        <h3>Location</h3>
+                        <p>Pune, Maharashtra, India</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <div class="contact-details">
+                        <h3>LinkedIn</h3>
+                        <p><a href="https://www.linkedin.com/in/ruturajbhambure" target="_blank">linkedin.com/in/ruturajbhambure</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label class="form-label">Your Name</label>
+                        <input type="text" class="form-input" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Your Email</label>
+                        <input type="email" class="form-input" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Subject</label>
+                        <input type="text" class="form-input" placeholder="Job Opportunity" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-input form-textarea" placeholder="Your message here..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Ruturaj Bhambure</h3>
+                <p>Operations Excellence Specialist with expertise in data analytics, process optimization, and delivering measurable results through analytical thinking and technology.</p>
+                <div class="social-links">
+                    <a href="mailto:bhamburern@gmail.com" class="social-link" title="Email">📧</a>
+                    <a href="https://www.linkedin.com/in/ruturajbhambure" target="_blank" class="social-link" title="LinkedIn">💼</a>
+                    <a href="tel:+919823145426" class="social-link" title="Phone">📱</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <p>
+                    <a href="#home" style="color: var(--text-secondary); text-decoration: none;">Home</a><br>
+                    <a href="#experience" style="color: var(--text-secondary); text-decoration: none;">Experience</a><br>
+                    <a href="#skills" style="color: var(--text-secondary); text-decoration: none;">Skills</a><br>
+                    <a href="#education" style="color: var(--text-secondary); text-decoration: none;">Education</a><br>
+                    <a href="#contact" style="color: var(--text-secondary); text-decoration: none;">Contact</a>
+                </p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Languages</h3>
+                <p>
+                    • English (Fluent)<br>
+                    • Marathi (Fluent)<br>
+                    • Hindi (Conversational)
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ruturaj Bhambure. All rights reserved. Built with passion and code.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll reveal animation
+        function reveal() {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(element => {
+                const windowHeight = window.innerHeight;
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', reveal);
+        reveal();
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                alert('Thank you for your message! I will get back to you soon.');
+                this.reset();
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 2000);
+        });
+
+        // Typing effect for hero description (optional enhancement)
+        const heroDesc = document.querySelector('.hero-description');
+        const text = heroDesc.textContent;
+        heroDesc.textContent = '';
+        let i = 0;
+        
+        function typeWriter() {
+            if (i < text.length) {
+                heroDesc.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 30);
+            }
+        }
+        
+        setTimeout(typeWriter, 500);
+    </script>
+</body>
+</html>
